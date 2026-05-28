@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Altum Capital UAB landing page",
   "scripts": {
-    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "build": "mkdir -p public/dist && tailwindcss -i ./src/input.css -o ./public/dist/output.css --minify && cp index.html public/",
     "dev": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "devDependencies": {
