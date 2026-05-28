@@ -20,4 +20,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: 6fb0a45eba0019b8d7ad97d308277bf9
-          command: pages deploy public --project-name altum-capital-landing
+          command: pages deploy . --project-name altum-capital-landing
