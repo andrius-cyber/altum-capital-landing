@@ -10,12 +10,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0WGSW96Z5X"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-0WGSW96Z5X');
+    function loadGA() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0WGSW96Z5X';
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', 'G-0WGSW96Z5X');
+    }
+    if (localStorage.getItem('ac_cookie_consent') === 'accepted') loadGA();
   </script>
 </head>
 <body class="font-sans bg-white text-slate-800 antialiased">
@@ -64,6 +70,47 @@
       <p class="text-xs mt-6">© 2026 Altum Capital, UAB. Visos teisės saugomos.</p>
     </div>
   </footer>
+
+
+  <!-- ═══════════════════════════════════════
+       COOKIE BANNER
+  ═══════════════════════════════════════ -->
+  <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-50 hidden">
+    <div class="bg-slate-950 border-t border-white/10 px-4 py-4 sm:px-6">
+      <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <p class="text-slate-400 text-sm flex-1">
+          Naudojame analizės slapukus (Google Analytics), kad geriau suprastume svetainės lankytojų elgesį. Jūsų duomenys tvarkomi pagal
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="text-amber-500 underline-offset-2 hover:underline">Google privatumo politiką</a>.
+        </p>
+        <div class="flex gap-3 shrink-0">
+          <button id="cookie-decline" class="px-4 py-2 text-sm font-medium text-slate-400 border border-white/20 rounded hover:border-white/50 hover:text-white transition-colors">
+            Atmesti
+          </button>
+          <button id="cookie-accept" class="px-4 py-2 text-sm font-medium text-slate-900 bg-amber-500 rounded hover:bg-amber-400 transition-colors">
+            Sutikti
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var banner = document.getElementById('cookie-banner');
+      if (!localStorage.getItem('ac_cookie_consent')) banner.classList.remove('hidden');
+
+      document.getElementById('cookie-accept').addEventListener('click', function () {
+        localStorage.setItem('ac_cookie_consent', 'accepted');
+        banner.classList.add('hidden');
+        loadGA();
+      });
+
+      document.getElementById('cookie-decline').addEventListener('click', function () {
+        localStorage.setItem('ac_cookie_consent', 'declined');
+        banner.classList.add('hidden');
+      });
+    })();
+  </script>
 
 </body>
 </html>
